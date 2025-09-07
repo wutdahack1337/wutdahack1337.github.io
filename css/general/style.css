@@ -1,8 +1,7 @@
 body {
-    font-family: "Noto Sans Mono", monospace;
-    font-size: 1.8em;
-    letter-spacing: 0.032em;
-    line-height: 1.8em;
+    font-size: 1.5em;
+    letter-spacing: 0.030em;
+    line-height: 1.6em;
 
     margin: 0 auto;
     max-width: 90rem;
@@ -34,4 +33,8 @@ h1 {
 
 img.cover {
     width: 111px;
+}
+
+p {
+  text-align: justify;
 }
