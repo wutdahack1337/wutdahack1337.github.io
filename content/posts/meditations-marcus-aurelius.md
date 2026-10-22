@@ -7,7 +7,7 @@ tags:
   - chu-nghia-khac-ky
 ---
 
-![[meditations-marcus-aurelius.jpg]]
+![[/images/meditations-marcus-aurelius.jpg]]
 
 Marcus Aurelius Antoninus được sinh ra vào ngày 26 tháng 4 năm 121 sau Công Nguyên, có tên thật là M. Annius Verus. Ông xuất thân từ một gia đình quý tộc, vốn tuyên bố thuộc dòng dõi của vua Numa - vị vua thứ hai của La Mã. Vậy là vị hoàng đế[^1] sùng đạo bậc nhất lại mang trong mình dòng máu của vị vua ngoan đạo nhất. 
 

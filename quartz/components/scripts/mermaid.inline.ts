@@ -184,10 +184,11 @@ const cssVars = [
   "--codeFont",
 ] as const
 
-let mermaidImport = undefined
-document.addEventListener("nav", async () => {
-  const center = document.querySelector(".center") as HTMLElement
-  const nodes = center.querySelectorAll("code.mermaid") as NodeListOf<HTMLElement>
+let mermaidImport: any = undefined
+const textMapping: WeakMap<HTMLElement, string> = new WeakMap()
+
+async function renderMermaidAll() {
+  const nodes = document.querySelectorAll<HTMLElement>("code.mermaid")
   if (nodes.length === 0) return
 
   mermaidImport ||= await import(
@@ -196,105 +197,104 @@ document.addEventListener("nav", async () => {
   )
   const mermaid = mermaidImport.default
 
-  const textMapping: WeakMap<HTMLElement, string> = new WeakMap()
   for (const node of nodes) {
-    textMapping.set(node, node.innerText)
+    if (!textMapping.has(node)) {
+      textMapping.set(node, node.innerText)
+    }
   }
 
-  async function renderMermaid() {
-    // de-init any other diagrams
-    for (const node of nodes) {
-      node.removeAttribute("data-processed")
-      const oldText = textMapping.get(node)
-      if (oldText) {
-        node.innerHTML = oldText
-      }
+  // Find nodes that need rendering
+  const nodesToRender: HTMLElement[] = []
+  for (const node of nodes) {
+    if (!node.getAttribute("data-processed")) {
+      nodesToRender.push(node)
+    }
+  }
+
+  if (nodesToRender.length === 0) return
+
+  const computedStyleMap = cssVars.reduce(
+    (acc, key) => {
+      acc[key] = window.getComputedStyle(document.documentElement).getPropertyValue(key)
+      return acc
+    },
+    {} as Record<(typeof cssVars)[number], string>,
+  )
+
+  const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: "loose",
+    theme: darkMode ? "dark" : "base",
+    themeVariables: {
+      fontFamily: computedStyleMap["--codeFont"],
+      primaryColor: computedStyleMap["--light"],
+      primaryTextColor: computedStyleMap["--darkgray"],
+      primaryBorderColor: computedStyleMap["--tertiary"],
+      lineColor: computedStyleMap["--darkgray"],
+      secondaryColor: computedStyleMap["--secondary"],
+      tertiaryColor: computedStyleMap["--tertiary"],
+      clusterBkg: computedStyleMap["--light"],
+      edgeLabelBackground: computedStyleMap["--highlight"],
+    },
+  })
+
+  await mermaid.run({ nodes: nodesToRender })
+
+  for (let i = 0; i < nodesToRender.length; i++) {
+    const codeBlock = nodesToRender[i] as HTMLElement
+    const pre = codeBlock.parentElement as HTMLPreElement
+    if (!pre) continue
+    const clipboardBtn = pre.querySelector(".clipboard-button") as HTMLButtonElement | null
+    const expandBtn = pre.querySelector(".expand-button") as HTMLButtonElement | null
+
+    if (clipboardBtn && expandBtn) {
+      const clipboardStyle = window.getComputedStyle(clipboardBtn)
+      const clipboardWidth =
+        clipboardBtn.offsetWidth +
+        parseFloat(clipboardStyle.marginLeft || "0") +
+        parseFloat(clipboardStyle.marginRight || "0")
+
+      expandBtn.style.right = `calc(${clipboardWidth}px + 0.3rem)`
+      pre.prepend(expandBtn)
     }
 
-    const computedStyleMap = cssVars.reduce(
-      (acc, key) => {
-        acc[key] = window.getComputedStyle(document.documentElement).getPropertyValue(key)
-        return acc
-      },
-      {} as Record<(typeof cssVars)[number], string>,
-    )
-
-    const darkMode = document.documentElement.getAttribute("saved-theme") === "dark"
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: "loose",
-      theme: darkMode ? "dark" : "base",
-      themeVariables: {
-        fontFamily: computedStyleMap["--codeFont"],
-        primaryColor: computedStyleMap["--light"],
-        primaryTextColor: computedStyleMap["--darkgray"],
-        primaryBorderColor: computedStyleMap["--tertiary"],
-        lineColor: computedStyleMap["--darkgray"],
-        secondaryColor: computedStyleMap["--secondary"],
-        tertiaryColor: computedStyleMap["--tertiary"],
-        clusterBkg: computedStyleMap["--light"],
-        edgeLabelBackground: computedStyleMap["--highlight"],
-      },
-    })
-
-    await mermaid.run({ nodes })
-  }
-
-  await renderMermaid()
-  document.addEventListener("themechange", renderMermaid)
-  window.addCleanup(() => document.removeEventListener("themechange", renderMermaid))
-
-  for (let i = 0; i < nodes.length; i++) {
-    const codeBlock = nodes[i] as HTMLElement
-    const pre = codeBlock.parentElement as HTMLPreElement
-    const clipboardBtn = pre.querySelector(".clipboard-button") as HTMLButtonElement
-    const expandBtn = pre.querySelector(".expand-button") as HTMLButtonElement
-
-    const clipboardStyle = window.getComputedStyle(clipboardBtn)
-    const clipboardWidth =
-      clipboardBtn.offsetWidth +
-      parseFloat(clipboardStyle.marginLeft || "0") +
-      parseFloat(clipboardStyle.marginRight || "0")
-
-    // Set expand button position
-    expandBtn.style.right = `calc(${clipboardWidth}px + 0.3rem)`
-    pre.prepend(expandBtn)
-
-    // query popup container
-    const popupContainer = pre.querySelector("#mermaid-container") as HTMLElement
-    if (!popupContainer) return
+    const popupContainer = pre.querySelector("#mermaid-container") as HTMLElement | null
+    if (!popupContainer) continue
 
     let panZoom: DiagramPanZoom | null = null
     function showMermaid() {
-      const container = popupContainer.querySelector("#mermaid-space") as HTMLElement
-      const content = popupContainer.querySelector(".mermaid-content") as HTMLElement
+      const container = popupContainer!.querySelector("#mermaid-space") as HTMLElement
+      const content = popupContainer!.querySelector(".mermaid-content") as HTMLElement
       if (!content) return
       removeAllChildren(content)
 
-      // Clone the mermaid content
-      const mermaidContent = codeBlock.querySelector("svg")!.cloneNode(true) as SVGElement
+      const svg = codeBlock.querySelector("svg")
+      if (!svg) return
+      const mermaidContent = svg.cloneNode(true) as SVGElement
       content.appendChild(mermaidContent)
 
-      // Show container
-      popupContainer.classList.add("active")
+      popupContainer!.classList.add("active")
       container.style.cursor = "grab"
-
-      // Initialize pan-zoom after showing the popup
       panZoom = new DiagramPanZoom(container, content)
     }
 
     function hideMermaid() {
-      popupContainer.classList.remove("active")
+      popupContainer!.classList.remove("active")
       panZoom?.cleanup()
       panZoom = null
     }
 
-    expandBtn.addEventListener("click", showMermaid)
-    registerEscapeHandler(popupContainer, hideMermaid)
-
-    window.addCleanup(() => {
-      panZoom?.cleanup()
-      expandBtn.removeEventListener("click", showMermaid)
-    })
+    if (expandBtn) {
+      expandBtn.addEventListener("click", showMermaid)
+      registerEscapeHandler(popupContainer, hideMermaid)
+    }
   }
-})
+}
+
+// Attach globally
+;(window as any).renderAllMermaid = renderMermaidAll
+
+document.addEventListener("nav", renderMermaidAll)
+document.addEventListener("DOMContentLoaded", renderMermaidAll)
+

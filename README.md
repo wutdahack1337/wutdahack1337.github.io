@@ -33,32 +33,35 @@ flowchart LR
 
 ## 📂 Cấu trúc thư mục
 
-- `content/`: **Thư mục quan trọng nhất** — đây là nơi bạn viết và quản lý các ghi chép bằng Obsidian.
-  - `content/index.md`: Nội dung trang chủ blog.
-  - `content/about.md`: Trang giới thiệu bản thân.
-  - `content/posts/`: Thư mục chứa các bài viết chia sẻ, cảm nghĩ, review sách...
-  - `content/images/`: Nơi lưu trữ hình ảnh minh họa cho bài viết.
-- `quartz.config.ts`: Cấu hình tên trang, ngôn ngữ (`vi-VN`), giao diện, phông chữ và liên kết.
-- `.github/workflows/deploy.yml`: File cấu hình GitHub Actions tự động build website.
+- `content/`: **Thư mục nội dung** — quản lý toàn bộ ghi chép của bạn.
+  - `content/draft/`: **Bản thảo dở dang (Drafts / Seedlings)** — nơi chứa các ý tưởng sơ khai đang hình thành theo tinh thần *"Work with the garage door up"*.
+  - `content/posts/`: **Ghi chép & Bài viết hoàn chỉnh (Notes)** — các bài viết và ghi chép đã hoàn thiện.
+  - `content/index.md`: Trang chủ Khu Vườn Ghi Chép (Working Notes), luôn cố định ở cột ngoài cùng bên trái.
+  - `content/images/`: Hình ảnh minh họa cho bài viết.
+- `quartz.config.ts`: Cấu hình tên trang, ngôn ngữ, giao diện.
+- `quartz/components/StackedNotes.tsx`: Động cơ trượt cột xếp chồng (Sliding Panes) lấy cảm hứng từ Andy Matuschak.
+- `quartz/components/AndyHeader.tsx`: Thanh điều hướng mỏng (38px) tích hợp tìm kiếm, dark mode và chuỗi breadcrumb.
 
 ---
 
-## ✍️ Hướng dẫn viết bài mới trong Obsidian
+## 🧭 Kiến trúc ghi chép (Sliding Panes - Andy Matuschak)
 
-### 1. Tạo file bài viết mới
-Tạo một file `.md` bên trong thư mục `content/posts/` (ví dụ: `content/posts/ten-bai-viet.md`).
+### 1. Trải nghiệm đọc xếp chồng (Stacked Notes)
+- Website hoạt động theo phong cách **Sliding Panes** ([notes.andymatuschak.org](https://notes.andymatuschak.org)):
+  - Trang chủ (`index.md`) luôn nằm ở cột bên trái.
+  - Khi click vào bất kỳ liên kết nội bộ nào, bài viết mới sẽ trượt ra ở cột bên phải tiếp theo mà không làm mất trang hiện tại.
+  - Bạn có thể cuộn ngang để xem toàn bộ chuỗi suy nghĩ và mạch đọc của mình.
 
-### 2. Định dạng đầu bài (Frontmatter)
-Thêm khối frontmatter ở đầu file để đặt tiêu đề, ngày đăng và các thẻ (tags):
+### 2. Định dạng bài viết đơn giản
+Khi tạo bài viết mới, bạn chỉ cần frontmatter cơ bản:
 
 ```markdown
 ---
-title: "Tiêu đề bài viết của bạn"
+title: "Tiêu đề bài viết"
 date: 2026-10-22
 tags:
-  - sach
-  - suy-nghi
-  - lap-trinh
+  - chu-de-1
+  - chu-de-2
 ---
 ```
 
