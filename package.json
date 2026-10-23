@@ -83,7 +83,7 @@
     "remark-rehype": "^11.1.2",
     "remark-smartypants": "^3.0.3",
     "rfdc": "^1.4.1",
-    "satori": "^0.62.0",
+    "satori": "^0.63.0",
     "serve-handler": "^6.1.7",
     "sharp": "^0.35.5",
     "shiki": "^1.29.2",
@@ -106,7 +106,7 @@
     "@types/source-map-support": "^0.5.10",
     "@types/ws": "^8.18.2",
     "@types/yargs": "^17.0.35",
-    "esbuild": "^0.27.2",
+    "esbuild": "^0.28.2",
     "prettier": "^3.9.10",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3"
