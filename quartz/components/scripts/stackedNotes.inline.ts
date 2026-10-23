@@ -46,7 +46,7 @@ function triggerMermaidRender() {
   if (typeof (window as any).renderAllMermaid === "function") {
     (window as any).renderAllMermaid()
   } else {
-    ;(document as any).dispatchEvent(new CustomEvent("nav"))
+    ; (document as any).dispatchEvent(new CustomEvent("nav"))
   }
 }
 
@@ -87,7 +87,7 @@ async function initStackedNotes() {
   if (isActuallyIndex && initialCenter) {
     // Current page IS index -> Set as Pane 0
     initialCenter.dataset.url = "/"
-    setupPaneElement(initialCenter, 0, "wutdahack's working notes")
+    setupPaneElement(initialCenter, 0, "wutdahack's notes")
     triggerMermaidRender()
   } else if (initialCenter) {
     // Current page is NOT index, but leftmost pane MUST be index:
@@ -117,7 +117,7 @@ async function initStackedNotes() {
             contentDiv.innerHTML = rootCenter.innerHTML
             indexPane.appendChild(contentDiv)
 
-            setupPaneElement(indexPane, 0, "wutdahack's working notes")
+            setupPaneElement(indexPane, 0, "wutdahack's notes")
             body.insertBefore(indexPane, initialCenter)
 
             // Scroll to active pane
@@ -399,6 +399,6 @@ function updateHeaderTrail() {
 }
 
 // Global hook for onclick
-;(window as any).scrollToPane = scrollToPane
+; (window as any).scrollToPane = scrollToPane
 
 document.addEventListener("DOMContentLoaded", initStackedNotes)

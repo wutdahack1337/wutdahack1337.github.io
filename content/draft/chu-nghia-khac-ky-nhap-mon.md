@@ -44,4 +44,4 @@ graph TD
 
 ## 3. Đọc tiếp
 
-Từ khung lý thuyết này, bạn có thể tiếp tục tìm hiểu cuộc đời và những chiêm nghiệm sâu sắc của hoàng đế La Mã Marcus Aurelius qua tác phẩm [[posts/meditations-marcus-aurelius|Suy ngẫm (Meditations)]].
+Từ khung lý thuyết này, bạn có thể tiếp tục tìm hiểu cuộc đời và những chiêm nghiệm sâu sắc của hoàng đế La Mã Marcus Aurelius qua tác phẩm [[meditations-marcus-aurelius|Suy ngẫm (Meditations)]].

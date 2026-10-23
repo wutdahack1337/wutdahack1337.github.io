@@ -17,7 +17,7 @@ export default (() => {
       <header id="andy-header">
         <div class="header-left">
           <a href={homeUrl} class="header-logo" id="home-link">
-            wutdahack's working notes
+            wutdahack's notes
           </a>
           <div class="header-trail" id="header-stack-trail">
             <span class="trail-item active">🏠 Trang chủ</span>

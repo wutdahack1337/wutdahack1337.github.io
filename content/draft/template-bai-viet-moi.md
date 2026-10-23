@@ -20,7 +20,7 @@ tags:
 
 ## 2. Các mắt xích liên quan (Wikilinks)
 
-- [[posts/chu-nghia-khac-ky-nhap-mon|Nhập môn Khắc kỷ]]
-- [[posts/meditations-marcus-aurelius|Suy ngẫm - Marcus Aurelius]]
+- [[chu-nghia-khac-ky-nhap-mon|Nhập môn Khắc kỷ]]
+- [[meditations-marcus-aurelius|Suy ngẫm - Marcus Aurelius]]
 
 ## 3. Suy nghĩ đang hình thành

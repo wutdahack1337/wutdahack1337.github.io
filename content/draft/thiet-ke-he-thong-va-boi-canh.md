@@ -30,4 +30,4 @@ Pixar là một ví dụ kinh điển: Họ không bao giờ nghiên cứu công
 ## 3. Bài viết liên quan
 
 Để tìm hiểu sâu hơn về việc bóc tách các giả định, hãy xem thêm:
-- [[posts/first-principles-thinking|Tư duy từ Nguyên lý đầu tiên (First Principles Thinking)]]
+- [[first-principles-thinking|Tư duy từ Nguyên lý đầu tiên (First Principles Thinking)]]

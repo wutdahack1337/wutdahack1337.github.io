@@ -29,5 +29,5 @@ Khi bạn viết trước hết cho chính bản thân mình:
 ## 3. Bài viết liên quan
 
 Những ghi chép liên quan về tư duy và sự tập trung:
-- [[posts/chu-nghia-khac-ky-nhap-mon|Nguyên lý phân đôi quyền kiểm soát (Dichotomy of Control)]]
-- [[posts/first-principles-thinking|Tư duy từ Nguyên lý đầu tiên (First Principles Thinking)]]
+- [[chu-nghia-khac-ky-nhap-mon|Nguyên lý phân đôi quyền kiểm soát (Dichotomy of Control)]]
+- [[first-principles-thinking|Tư duy từ Nguyên lý đầu tiên (First Principles Thinking)]]
