@@ -19,6 +19,25 @@ Nơi tập luyện:
 
 Khung
 - Block 1: Global Config & Reproducibility 
+    - Định nghĩa toàn bộ hằng số
+    - Cố định tất cả seed 
+```python
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu)
+
+SEED=1337
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+if device == "cuda":
+	torch.cuda.manual_seed(SEED)
+
+
+EPOCHS=10
+LR = 3e-4 or 1e-3 or 1e-4
+WD = 0.01 (default) -> 0.1
+BATCH_SIZE=16
+```
+
+
 - Block 2: Data Preparation & Dataset Class & Data Loader & Validation Strategy 
 - Block 3: Modeling & Hyperparemeter
 - Block 4: Training & Validation Loop 
