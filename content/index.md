@@ -3,6 +3,7 @@ title: wutdahack's notes
 ---
 
 
-
-
-- [[Chuẩn bị cho vòng trường OLP AI 2026]] 
+- [[OLP AI 2026]] 
+- [[1 ngày tốt]]
+- [[Get it done]]
+- [[Metacognition]]
