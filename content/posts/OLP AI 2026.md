@@ -110,7 +110,13 @@ Feature Engineering + (CatBoost -> XGBoost)
 | Classification | microsoft/trocr-base-printed (text images)<br>or<br>TF-IDF + XGBoost (normal text) | TF-IDF Vectorizer + LogisticRegression/LinearSVC<br>or<br>BiLSTM 1-2 lớp + nn.Embedding + SpatialDropout1d(0.2)<br> |
 | Dịch máy       |                                                                                    | nltk + Transformer                                                                                                  |
 
+**Google Colab**
 
+- mount -> copy dataset from drive (/content/drive)
+
+**Kaggle**
+- /kaggle/input: dataset 
+- /kaggle/working: submission, best_model 
 
 
 
