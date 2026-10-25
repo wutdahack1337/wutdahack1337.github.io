@@ -8,4 +8,6 @@ Walk you through my mind
 - [[Get it done]]
 - [[Metacognition]]
 - [[Gaining - Alysa Liu]]
+- [[Failure - Kobe Bryant]]
 - [[Just 1 thing]]
+- [[Ngủ]]
