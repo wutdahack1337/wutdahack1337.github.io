@@ -11,3 +11,4 @@ Walk you through my mind
 - [[Failure - Kobe Bryant]]
 - [[Just 1 thing]]
 - [[Ngủ]]
+- [[Thất bại]]
