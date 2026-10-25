@@ -12,3 +12,4 @@ Walk you through my mind
 - [[Just 1 thing]]
 - [[Ngủ]]
 - [[Thất bại]]
+- [[Phương pháp học]]
