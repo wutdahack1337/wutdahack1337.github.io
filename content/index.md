@@ -13,3 +13,4 @@ Walk you through my mind
 - [[Ngủ]]
 - [[Thất bại]]
 - [[Phương pháp học]]
+- [[sống]]
