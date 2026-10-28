@@ -13,4 +13,6 @@ Walk you through my mind
 - [[Ngủ]]
 - [[Thất bại]]
 - [[Phương pháp học]]
-- [[sống]]
+- [[Sống]]
+- [[Phiên bản hoàn hảo]]
+- [[Xây dựng giá trị bản thân]]
