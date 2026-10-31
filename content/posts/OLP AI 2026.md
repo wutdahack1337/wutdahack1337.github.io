@@ -25,23 +25,26 @@ Khung
 import torch
 import numpy as np
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu)
-
-SEED=1337
+SEED = 1337
+random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
-if device == "cuda":
-	torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(device)
 
-EPOCHS=10
-LR = 3e-4 or 1e-3 or 1e-4
-WD = 0.01 (default) -> 0.1
-BATCH_SIZE=16
+TEST_SIZE = 0.2
+WORKERS = 2
+IMAGE_SIZE = 224
+EPOCHS = 10
+BATCH_SIZE = 16
+LR = 5e-4
+WD = 1e-4
 ```
 
 
-- Block 2: Data Preparation & Dataset Class
+- Block 2: Validation Strategy & Data Augmentation
     - Inspect tập dữ liệu: có mất cân bằng không? 
     - Làm giàu dữ liệu nếu dữ liệu bị thiếu, còn dữ liệu đầy đủ rồi mà làm giàu thì chỉ tốn thêm thời gian mà thôi: transforms với ảnh, sinh dữ liệu giả với text và feature engineering với dữ liệu bảng.
     - Xây dựng Class Dataset, có 3 hàm bắt buộc: `__init__`, `__len__`, `__getitem__` - mình cũng chưa rành món này lắm, sẽ first principle sau 
@@ -52,16 +55,28 @@ from torch.utils.data import DataLoader
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 
-train_transform = 
+train_transform = transforms.Compose([
+    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+    transforms.ToTensor(),
+    transforms.Normalize(MEAN, STD),
+])
 
-test_transform = 
+val_transform = transforms.Compose([
+    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+    transforms.ToTensor(),
+    transforms.Normalize(MEAN, STD),
+])
 ```
 
-- Block 3: Validation Strategy & Data Loader
+- Block 3: Dataset & Data Loader
     - Chia tập train test 1 cách hợp lý, có 2 cách, cách đầu tiên là sử dụng train_test_split (sử dụng stratify=y để mà cân bằng nhãn) để mà chạy được MVP trước cái đã, nếu mọi chuyện đã hợp tình hợp lý rồi thì chuyển qua sử dụng K-Fold để sinh ra K models dựa trên tập dữ liệu và lấy trung bình kết quả của K models nó để quyết định kết quả cuối cùng 
     - Tạo train_loader và val_loader với num_workers và pin_memory=True để tăng tốc nạp dữ liệu vào GPU 
 ```python
-train_test_split(X, y, test_size=0.2, stratify=y, random_state=SEED)
+train_test_split(X, y, test_size=TEST_SIZE, stratify=y, random_state=SEED)
+
+train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=WORKERS, pin_memory=True, persistent_workers=True, prefetch_factor=WORKERS)
+
+val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=WORKERS, pin_memory=True, persistent_workers=True)
 ```
 
 - Block 4: Modeling & Hyperparemeter
@@ -82,6 +97,78 @@ train_test_split(X, y, test_size=0.2, stratify=y, random_state=SEED)
 	    - loop qua val_loader 
 	    - Lưu lại model tốt nhất, nên ghi nhận lại model tốt nhất mọi thời đại luôn, có nghĩa là phải so sánh giữa model tốt nhất trước đó và model tốt nhất hiện tại chứ không phải là lưu lại lung tung 
 	- scheduler.step()
+```python
+best_val_acc = 0.0
+for epoch in range(EPOCHS):
+    # Training Phase
+    model.train()
+    train_loss = 0.0
+    train_correct = 0
+    train_total = 0
+
+    train_pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{EPOCHS} [Train]")
+    for images, labels in train_pbar:
+        images = images.to(device, non_blocking=True)
+        labels = labels.to(device, non_blocking=True)
+        
+        optimizer.zero_grad(set_to_none=True)
+        
+        # Mixed precision forward pass
+        with torch.amp.autocast("cuda"):
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+            
+        # Scaled backward pass & optimization
+        scaler.scale(loss).backward()
+        scaler.step(optimizer)
+        scaler.update()
+        
+        train_loss += loss.item() * images.size(0)
+        _, predicted = outputs.max(1)
+        train_total += labels.size(0)
+        train_correct += predicted.eq(labels).sum().item()
+        
+        train_pbar.set_postfix(loss=f"{loss.item():.4f}", acc=f"{train_correct/train_total:.4f}")
+        
+    train_loss /= train_total
+    train_acc = train_correct / train_total
+
+    # Validation Phase
+    model.eval()
+    val_loss = 0.0
+    val_correct = 0
+    val_total = 0
+    
+    with torch.no_grad():
+        val_pbar = tqdm(val_loader, desc=f"Epoch {epoch+1}/{EPOCHS} [Val]")
+        for images, labels in val_pbar:
+            images = images.to(device, non_blocking=True)
+            labels = labels.to(device, non_blocking=True)
+            
+            with torch.amp.autocast("cuda"):
+                outputs = model(images)
+                loss = criterion(outputs, labels)
+                
+            val_loss += loss.item() * images.size(0)
+            _, predicted = outputs.max(1)
+            val_total += labels.size(0)
+            val_correct += predicted.eq(labels).sum().item()
+            
+            val_pbar.set_postfix(loss=f"{loss.item():.4f}", acc=f"{val_correct/val_total:.4f}")
+            
+    val_loss /= val_total
+    val_acc = val_correct / val_total
+    
+    scheduler.step()
+
+    print(f"Epoch {epoch+1} Summary | Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.4f} | Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}")
+    
+    # Save the best model based on validation accuracy
+    if val_acc > best_val_acc:
+        best_val_acc = val_acc
+        torch.save(model.state_dict(), "best_model.pth")
+        print(f"-> Saved new best_model.pth with Val Acc: {best_val_acc:.4f}")
+```
 - Block 6: Inference & Submission 
     - Khởi tạo lại kiến trúc model trắng từ đầu, load_weight thừ best_model.pth
     - Xây dựng TestDataset (không có nhãn) và test_loader
