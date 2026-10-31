@@ -56,7 +56,7 @@ MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 
 train_transform = transforms.Compose([
-    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
+    transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)) or transforms.RandomResizedCrop((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor(),
     transforms.Normalize(MEAN, STD),
 ])
@@ -85,7 +85,7 @@ val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_w
     - Tiêu chuẩn
         - Loss: CrossEntropyLoss (Phân loại đa lớp), BCEWithLogitLoss (Đa nhãn/Nhị phân), MSELoss (Hồi quy) 
         - Optimizer: AdamW 
-        - Scheduler: ConsineAnnealingLR 
+        - Scheduler: CosineAnnealingLR 
 - Block 5: Training & Validation Loop 
     - khởi tạo scaler (GradScaler)
     - train mode (model.train()):
@@ -174,7 +174,11 @@ for epoch in range(EPOCHS):
     - Xây dựng TestDataset (không có nhãn) và test_loader
     - prediction loop with inference_mode()
     - lưu kết quả và xuất submission.csv 
-
+```python
+test_df = pd.read_csv(DATA_DIR / "test.csv")
+test_dataset = Dataset(test_df, transform=val_transform, is_test=True)
+test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=WORKERS, pin_memory=True, persistent_workers=True)
+```
 
 **Machine Learning**
 
