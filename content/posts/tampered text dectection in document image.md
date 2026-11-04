@@ -2,11 +2,50 @@
 DCT là gì? 
 fusion là gì? attention là gì? 
 
+
 ---
-EPOCHS=20, train_mvp=2000, val_mvp = 500, BATCH_SIZE=8, ENCODER_LR = 5e-4, DECODER_LR = 5e-3. loss = BCE + Dice. DTD-lightweight 
+EPOCHS=20, train_mvp=3000, val_mvp = 750, BATCH_SIZE=4, ENCODER_LR = 5e-4, DECODER_LR = 5e-3. loss = BCE + Dice. effientNet-b0 DTD-lightweight 
 
-thay từ MobileNetV3 thành effientNet-b0
+Best Val Dice: ==🟢0.6658==
+Test: Precision(Micro)=0.8178 | Recall(Micro)=0.6377 | Macro Dice=0.6310 | IoU(Micro)=0.5583 | Accuracy(Micro)=0.9964
+FCD: Precision(Micro)=0.9510 | Recall(Micro)=0.2765 | Macro Dice=0.3273 | IoU(Micro)=0.2726 | Accuracy(Micro)=0.9737
+SCD: Precision(Micro)=0.7306 | Recall(Micro)=0.2689 | Macro Dice=0.2451 | IoU(Micro)=0.2446 | Accuracy(Micro)=0.9926
+Avg Dice: ==🟢0.40112279213398905==
 
+-> kết luận: tăng dữ liệu thì độ chính xác cũng tăng theo, nhưng mà cần giảm xíu EPOCHS vì các cái cuối sẽ không hội tụ nữa
+
+---
+EPOCHS=20, train_mvp=2500, val_mvp = 1000, BATCH_SIZE=4, ENCODER_LR = 5e-4, DECODER_LR = 5e-3. loss = BCE + Dice. effientNet-b0 DTD-lightweight. Curriculum Learning for Tampering Detection
+
+bằng 1 cách thần kỳ nào đó thì nó lại thấp hơn
+Best Val Dice: ==🔴0.5391==
+
+Test: Precision(Micro)=0.4022 | Recall(Micro)=0.6087 | Macro Dice=0.4627 | IoU(Micro)=0.3195 | Accuracy(Micro)=0.9910
+FCD: Precision(Micro)=0.8796 | Recall(Micro)=0.2710 | Macro Dice=0.3362 | IoU(Micro)=0.2613 | Accuracy(Micro)=0.9733
+SCD: Precision(Micro)=0.4832 | Recall(Micro)=0.2390 | Macro Dice=0.2318 | IoU(Micro)=0.1904 | Accuracy(Micro)=0.9910
+
+Avg Dice:  ==🔴0.3435641435883862==
+
+---
+EPOCHS=20, train_mvp=2000, val_mvp = 500, BATCH_SIZE=4, ENCODER_LR = 5e-4, DECODER_LR = 5e-3. loss = BCE + Dice. effientNet-b0 DTD-lightweight 
+
+thay từ MobileNetV3 thành effientNet-b0 -> EfficientNet-B0 + DCT + scSE + LiteMID
+
+Best Val Dice: ==🟢0.5962==
+Avg Dice:  ==🟢0.348216627381976==
+
+Test: Precision(Micro)=0.7127 | Recall(Micro)=0.5682 | Macro Dice=0.5235 | IoU(Micro)=0.4623 | Accuracy(Micro)=0.9953
+FCD: Precision(Micro)=0.9420 | Recall(Micro)=0.1765 | Macro Dice=0.2318 | IoU(Micro)=0.1746 | Accuracy(Micro)=0.9697
+SCD: Precision(Micro)=0.7585 | Recall(Micro)=0.2975 | Macro Dice=0.2894 | IoU(Micro)=0.2717 | Accuracy(Micro)=0.9928
+
+-> kết luận: quá ngon
+
+![[Pasted image 20261104214500.png]]
+![[Pasted image 20261104214514.png]]
+![[Pasted image 20261104214527.png]]
+![[Pasted image 20261104214537.png]]
+![[Pasted image 20261104214548.png]]
+![[Pasted image 20261104214559.png]]
 
 ---
 
@@ -35,7 +74,6 @@ Best Val Dice: ==🟢0.5322==
 
 Avg Dice:  0.2941172975798448
 
--> 
 
 
 ---
