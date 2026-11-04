@@ -16,3 +16,5 @@ Walk you through my mind
 - [[Sống]]
 - [[Phiên bản hoàn hảo]]
 - [[Xây dựng giá trị bản thân]]
+- [[tampered text dectection in document image]]
+- [[hoàn thành 1 cái gì đó]]
