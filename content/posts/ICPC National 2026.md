@@ -1,5 +1,5 @@
 ---
-title: icpc
+title: ICPC National 2026
 date: 2026-11-06
 ---
 banger where to start: https://u.icpc.global/

@@ -32,8 +32,21 @@ luyện archive
 5. Tìm lời giải
 6. Không có tiến triển thì chuyển sang bài khác
 -> tương tự như là việc có 1 đống bottleneck, có cái nhìn tổng quan, suy nghĩ và lựa chọn bottleneck nào là đáng để làm nhất 
+[[tư duy nên tránh mang theo từ việc học và thi]]
 
-[[tư duy nên tránh trong trường học khi ra đời]]
+việc có meta và liên tục đặt ra những câu hỏi rất quan trọng
+
+Đọc đề
+- Lược bỏ câu chuyện không cần thiết
+- Tìm đối tượng toán học thật sự
+- Chú ý constraints, kể cả những giới hạn nhỏ
+- Chú ý những chi tiết bất thường
+- Kiểm tra mô hình bằng sample
+- Tìm cách chuyển bài toán thành 1 mô hình quen thuộc
+
+Đừng sưu tầm thuật toán, học thuật toán để giải quyết vấn đề
+-> tương tự như ở business: problem -> mechanism -> algorithm
+
 ### Problem-solving checklist
 A. Reading the problem
 - [ ] Tại sao giới hạn này tồn tại? nếu bỏ giới hạn đó thì bài toán thay đổi như thế nào?

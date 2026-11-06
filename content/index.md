@@ -20,3 +20,4 @@ Walk you through my mind
 - [[hoàn thành 1 cái gì đó]]
 - [[ICPC National 2026]]
 - [[cp]]
+- [[tư duy nên tránh mang theo từ việc học và thi]]
