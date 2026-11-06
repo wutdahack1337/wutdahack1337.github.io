@@ -19,3 +19,4 @@ Walk you through my mind
 - [[tampered text dectection in document image]]
 - [[hoàn thành 1 cái gì đó]]
 - [[ICPC National 2026]]
+- [[cp]]

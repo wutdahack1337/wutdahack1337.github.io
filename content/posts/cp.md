@@ -2,7 +2,6 @@
 title: cp
 date: 2026-11-06
 ---
-
 solving problems and solving problems fast are two different skills. you need to train them separately
 - solve: khả năng tìm ra các giải cho 1 bài toán chưa biết cách làm -> học cách suy luận, khám phá cấu trúc
 - fast: khả năng giải nhanh, code chính xác và tránh những lỗi không cần thiết -> nhận diện pattern, triển khai, debug và quản lý thời gian
@@ -10,7 +9,7 @@ nếu chỉ luyện contest, thì đó là fast nhiều hơn solve, bởi contes
 - deep practice - học cách giải bài chưa biết - problem archive
 - speed practice - giải bài quen thuộc nhanh, chính xác - timed contest
 
-### Deep practice
+# Deep practice
 ![[Pasted image 20261106081639.png]]
 
 vùng ở giữa chính là nơi nên dành phần lớn thời gian để luyện tập
@@ -23,6 +22,18 @@ mục tiêu:
 - học thuật toán mới - luyện theo topic
 - học cách nhận diện thuật toán - luyện mixed problems 
 
+đừng biết quá nhiều thuật toán nhưng lại thiếu khả năng tìm ra cách giải
+
+luyện archive 
+1. Mở 12 bài
+2. Đọc tất cả problem statements
+3. Suy nghĩ sơ bộ về từng bài 
+4. Chọn bài ngon nhất
+5. Tìm lời giải
+6. Không có tiến triển thì chuyển sang bài khác
+-> tương tự như là việc có 1 đống bottleneck, có cái nhìn tổng quan, suy nghĩ và lựa chọn bottleneck nào là đáng để làm nhất 
+
+[[tư duy nên tránh trong trường học khi ra đời]]
 ### Problem-solving checklist
 A. Reading the problem
 - [ ] Tại sao giới hạn này tồn tại? nếu bỏ giới hạn đó thì bài toán thay đổi như thế nào?
@@ -30,7 +41,7 @@ A. Reading the problem
 - [ ] đề thực sự yêu cầu tính toán hoặc tối ưu điều gì?
 - [ ] có thể chuyển bài toán thành 1 mô hình quen thuộc không?
 B. Exploring the solution
-- [ ] nếu giải 1 phiên bản đơn giản hơn thì sao?
+- [ ] [\*] nếu giải 1 phiên bản đơn giản hơn thì sao?
 - [ ] nếu n rất nhỏ thì sẽ giải bằng cách nào?
 - [ ] nếu bỏ giới hạn thời gian và bộ nhớ thì sẽ giải bằng cách nào?
 - [ ] có thể giải 1 query trước rồi tổng quát hóa không?
@@ -44,7 +55,7 @@ C. Before implementation
 - [ ] Phần nào là bottleneck?
 D. After failure
 - [ ] hiểu sai đề hay thuật toán sai?
-- [ ] lỗi nằm ở idea hay implementation
+- [ ] [\*] lỗi nằm ở idea hay implementation
 - [ ] có test nào phá vỡ giả định của t không?
 - [ ] brute force có thực sự độc lập với bài toán chính không? 
 E. After AC
@@ -52,3 +63,13 @@ E. After AC
 - [ ] có observation nào nhận ra quá muộn không?
 - [ ] có thể đơn giản hóa implementation không?
 - [ ] nếu gặp bài tương tự trong contest thì có nhận ra nhanh hơn không?
+
+# Fast Practice
+
+recognition speed - đọc đề và nhận ra cấu trúc bài toán nhanh 
+
+reasoning speed - tìm ra observation, chứng minh và lựa chọn thuật toán 
+
+implementation speed - chuyển ý tưởng thành code, ít bug 
+
+debugging speed - tìm lỗi nhanh khi gặp WA, TLE hoặc RE
