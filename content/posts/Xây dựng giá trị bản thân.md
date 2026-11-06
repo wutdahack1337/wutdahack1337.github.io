@@ -1,5 +1,5 @@
 ---
-title: xây dựng
+title: Xây dựng giá trị bản thân
 date: 2026-10-27
 ---
 Ăn cắp từ slide của anh Đặng Duy Nam
