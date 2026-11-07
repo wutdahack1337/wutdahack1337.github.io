@@ -21,3 +21,4 @@ Walk you through my mind
 - [[ICPC National 2026]]
 - [[cp]]
 - [[tư duy nên tránh mang theo từ việc học và thi]]
+- [[next goal to lock in]]

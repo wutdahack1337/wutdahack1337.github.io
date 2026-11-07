@@ -25,7 +25,7 @@ mục tiêu:
 đừng biết quá nhiều thuật toán nhưng lại thiếu khả năng tìm ra cách giải
 
 luyện archive 
-1. Mở 12 bài
+1. Mở 15 bài
 2. Đọc tất cả problem statements
 3. Suy nghĩ sơ bộ về từng bài 
 4. Chọn bài ngon nhất
