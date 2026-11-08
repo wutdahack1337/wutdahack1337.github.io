@@ -50,3 +50,10 @@ date: 2026-11-07
 30/01: ==🟢IELTS - 9.0== 
 
 21/2: ==🟢IELTS - 9.0==
+
+/5: chill ~~
+- physical, martial arts
+- learn how to drive car
+- learn about leadership
+- learn team
+- learn team management 
