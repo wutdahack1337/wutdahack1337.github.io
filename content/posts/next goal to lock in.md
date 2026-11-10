@@ -2,21 +2,16 @@
 title: next goal to lock in
 date: 2026-11-07
 ---
-7/11 (now)
-- learn cp (Thanh)
-
-8/11: ==🟢ICPC National - Champion==
-- learn CP (Thanh)
+9/11 (now)
 - learn IELTS 
-- finish project 
-
 
 22/11
-- learn security practice exam
+- learn security practice exam 
 - learn final exam 
 - learn OLP AI 
-- learn CP (Thanh)
+- learn CP - Thanh 
 - learn IELTS 
+
 
 26/11: ==🟢security practice exam - 10==
 
