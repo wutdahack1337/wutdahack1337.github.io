@@ -40,15 +40,22 @@ date: 2026-11-07
 
 23/01
 - learn IETLS
-- physical, martial arts
+- physical: pull up, running 
 
 30/01: ==🟢IELTS - 9.0== 
 
 21/2: ==🟢IELTS - 9.0==
 
+
 /5: chill ~~
+- health 
+- physical: pull up, running 
+
+/6
 - physical, martial arts
 - learn how to drive car
 - learn about leadership
 - learn team
-- learn team management 
+- learn team management
+- learn about law
+- learn about philosophic (Marx-Lenin, Hồ Chí Minh)
